@@ -1,13 +1,13 @@
 package main
 
 import (
-	"AppleStore/server/config"
 	"fmt"
 	"log"
 
-	// "server/routes"
 	"time"
 
+	"github.com/1001001010/AppleStory/server/config"
+	"github.com/1001001010/AppleStory/server/database"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
@@ -17,12 +17,12 @@ func init() {
 	config.LoadEnvVariables()
 
 	// Подключение к базе данных и синхронизация
-	// if err := config.ConnectToDb(); err != nil {
-	// 	log.Fatalf("Error connecting to the database: %v", err)
-	// }
-	// if err := config.SyncDatabase(); err != nil {
-	// 	log.Fatalf("Error syncing the database: %v", err)
-	// }
+	if err := database.Connect(); err != nil {
+		log.Fatalf("DB error: %v", err)
+	}
+	if err := database.Migrate(); err != nil {
+		log.Fatalf("Migration error: %v", err)
+	}
 }
 
 func main() {
