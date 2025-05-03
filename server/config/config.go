@@ -8,12 +8,13 @@ import (
 )
 
 var (
-	DbHost     string
-	DbPort     string
-	DbUser     string
-	DbPassword string
-	DbName     string
-	Port       string
+	DbHost       string
+	DbPort       string
+	DbUser       string
+	DbPassword   string
+	DbName       string
+	Port         string
+	JwtSecretKey string
 )
 
 func LoadEnvVariables() {
@@ -29,6 +30,7 @@ func LoadEnvVariables() {
 	DbPassword = getEnv("DB_PASSWORD", "")
 	DbName = getEnv("DB_NAME", "mydb")
 	Port = getEnv("PORT", "8080")
+	JwtSecretKey = getEnv("JWT_SECRET_KEY", "default-secret")
 }
 
 // Получаем значения с дефолтными значениями
@@ -42,6 +44,11 @@ func getEnv(key string, defaultValue string) string {
 // Получние порта
 func GetPort() string {
 	return Port
+}
+
+// Получние токена
+func GetJwtSecretKey() string {
+	return JwtSecretKey
 }
 
 // Создаем подключение к базе данных

@@ -8,6 +8,7 @@ import (
 
 	"github.com/1001001010/AppleStory/server/config"
 	"github.com/1001001010/AppleStory/server/database"
+	"github.com/1001001010/AppleStory/server/routes"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
@@ -47,7 +48,7 @@ func main() {
 	r.Use(cors.New(corsConfig))
 
 	// Настройка роутов
-	// routes.UserRoutes(r)
+	routes.SetUpRoutes(r)
 
 	// Запуск сервера
 	port := config.GetPort() // Получаем порт из конфигурации
