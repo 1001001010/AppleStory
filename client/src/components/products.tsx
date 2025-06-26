@@ -268,7 +268,7 @@ export function Products() {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-2">
                       <div className="flex items-center space-x-1">
-                        <Star className="h-4 w-4 fill-black text-black" />
+                        <Star className="h-4 w-4 text-цршеу" />
                         <span className="text-sm font-medium">
                           {product.rating}
                         </span>

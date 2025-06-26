@@ -48,7 +48,7 @@ func main() {
 	r.Use(cors.New(corsConfig))
 
 	// Настройка роутов
-	routes.SetUpRoutes(r)
+	routes.SetupRoutes(r)
 
 	// Запуск сервера
 	port := config.GetPort() // Получаем порт из конфигурации

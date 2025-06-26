@@ -59,3 +59,29 @@ func RegisterUser(input models.RegisterInput) (models.User, string, error) {
 	}
 	return user, token, nil
 }
+
+func LoginUser(email, password string) (models.User, string, error) {
+	var user models.User
+	if err := database.DB.Where("email = ?", email).First(&user).Error; err != nil {
+		return models.User{}, "", fmt.Errorf("неверный email или пароль")
+	}
+
+	if !user.CheckPassword(password) {
+		return models.User{}, "", fmt.Errorf("неверный email или пароль")
+	}
+
+	token, err := GenerateJWT(user.ID)
+	if err != nil {
+		return models.User{}, "", fmt.Errorf("не удалось создать токен")
+	}
+
+	return user, token, nil
+}
+
+func GetUserByID(userID uint) (models.User, error) {
+	var user models.User
+	if err := database.DB.First(&user, userID).Error; err != nil {
+		return models.User{}, fmt.Errorf("пользователь не найден")
+	}
+	return user, nil
+}
